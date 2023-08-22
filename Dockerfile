@@ -22,17 +22,10 @@ RUN apk -U upgrade \
     && chmod g+rwx /config /root \
     && helm repo add "stable" "https://charts.helm.sh/stable" --force-update \
     && kubectl version --client \
-    && helm version \
+    && helm version 
 ## Network tools 
-RUN apk add -y \
-      tcpdump \
-      snmp \
-      snmp-mibs-downloader \
-      net-tools \
-      netcat \
-      vim \
-      mtr 
-
+RUN apk add mtr tcpdump net-tools  vim 
+# netcat snmp snmp-mibs-downloader
 RUN helm plugin install https://github.com/chartmuseum/helm-push
 # python tools 
 RUN pip install --upgrade pip
