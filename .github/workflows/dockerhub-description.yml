@@ -10,13 +10,14 @@ on:
 jobs:
   dockerHubDescription:
     runs-on: ubuntu-latest
+    environment: main
     steps:
     - uses: actions/checkout@v3
 
     - name: Docker Hub Description
       uses: peter-evans/dockerhub-description@v3
       with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        username: ${{ secrets.DOCKER_USERNAME || vars.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD || vars.DOCKER_PASSWORD }}
         repository: hesamyavari/swiss-knife
         short-description: ${{ github.event.repository.description }}
